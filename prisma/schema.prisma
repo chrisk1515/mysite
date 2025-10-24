@@ -1,0 +1,17 @@
+﻿generator client {
+  provider = "prisma-client-js"
+  // binaryTargets optional: ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL") // pooled
+  directUrl = env("DIRECT_URL")   // direct
+}
+
+model Note {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+}
