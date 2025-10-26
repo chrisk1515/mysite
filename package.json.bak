@@ -1,4 +1,4 @@
-{
+﻿{
   "name": "mysite",
   "version": "0.1.0",
   "private": true,
@@ -6,13 +6,10 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "studio": "prisma studio",
-    "smoke": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3000",
-    "smoke:3001": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3001"
+    "lint":"eslint","studio":"prisma studio","smoke":"powershell -ExecutionPolicy Bypass -File .\\smoke-test.ps1 -Port 3000"
   },
   "dependencies": {
-    "@prisma/client": "^6.18.0",
+    "@prisma/client": "6.18.0",
     "next": "16.0.0",
     "react": "19.2.0",
     "react-dom": "19.2.0"
@@ -30,3 +27,4 @@
     "typescript": "^5"
   }
 }
+

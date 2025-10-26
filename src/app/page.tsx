@@ -1,12 +1,13 @@
-﻿import Button from "@/components/Button";
-
-export default function Home() {
+﻿export default function Home() {
   return (
-    <main className="min-h-screen flex items-center justify-center">
-      <div className="space-y-4 text-center">
-        <h1 className="text-2xl font-bold">Hello Next.js</h1>
-        <Button>Works!</Button>
-      </div>
+    <main style={{ padding: 24, fontFamily: "system-ui, sans-serif" }}>
+      <h1>It works ✅</h1>
+      <p>Server time: {new Date().toLocaleString()}</p>
+      <ul>
+        <li><a href="/api/ping">/api/ping</a></li>
+        <li><a href="/api/db-health">/api/db-health</a></li>
+        <li><a href="/notes">/notes</a></li>
+      </ul>
     </main>
   );
 }

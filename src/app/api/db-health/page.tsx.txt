@@ -1,13 +1,14 @@
-﻿type Note = { id: string; title: string; body: string; createdAt: string };
+// src/app/notes/page.tsx
+type Note = { id: string; title: string; body: string; createdAt: string }
 
 async function getNotes(): Promise<Note[]> {
-  const res = await fetch("http://localhost:3000/api/notes", { cache: "no-store" });
-  if (!res.ok) throw new Error("Failed to fetch notes");
-  return res.json();
+  const res = await fetch("http://localhost:3000/api/notes", { cache: "no-store" })
+  if (!res.ok) throw new Error("Failed to fetch notes")
+  return res.json()
 }
 
 export default async function NotesPage() {
-  const notes = await getNotes();
+  const notes = await getNotes()
   return (
     <main style={{ padding: 24, fontFamily: "system-ui, sans-serif" }}>
       <h1>Notes</h1>
@@ -22,5 +23,5 @@ export default async function NotesPage() {
         ))}
       </ul>
     </main>
-  );
+  )
 }
