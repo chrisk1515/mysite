@@ -3,30 +3,48 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3012",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 3000",
     "lint": "eslint",
     "studio": "prisma studio",
     "smoke": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3000",
-    "smoke:3001": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3001"
+    "smoke:3001": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3001",
+    "dev:web": "next dev -p 3012",
+    "build:web": "next build",
+    "start:web": "next start -p 3000",
+    "migrate:deploy": "prisma migrate deploy",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@prisma/client": "^6.18.0",
-    "next": "16.0.0",
-    "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "next": "^16.0.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
-    "@types/react": "^19",
+    "@types/node": "^20.19.23",
+    "@types/react": "^19.2.2",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
     "eslint-import-resolver-typescript": "^4.4.4",
     "prisma": "^6.18.0",
     "tailwindcss": "^4",
-    "typescript": "^5"
-  }
+    "typescript": "^5.9.3"
+  },
+  "description": "Next.js (App Router) + Prisma + Notes API.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/<your-username>/mysite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/<your-username>/mysite/issues"
+  },
+  "homepage": "https://github.com/<your-username>/mysite#readme"
 }

@@ -1,9 +1,0 @@
-// src/app/not-found.tsx
-export default function NotFound() {
-  return (
-    <main style={{ padding: 24, fontFamily: 'system-ui,sans-serif' }}>
-      <h1>404 — Not Found</h1>
-      <p>That page doesn’t exist.</p>
-    </main>
-  )
-}
