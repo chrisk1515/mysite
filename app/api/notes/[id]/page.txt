@@ -1,0 +1,93 @@
+New-Item -ItemType Directory -Force .\app\notes\[id]\edit | Out-Null
+
+@'
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+
+type Note = { id: string; title: string; body: string; createdAt: string };
+
+export default function EditNotePage({ params }: { params: { id: string } }) {
+  const { id } = params;
+  const router = useRouter();
+  const [note, setNote] = useState<Note | null>(null);
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [err, setErr] = useState<string | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        setErr(null);
+        const res = await fetch("/api/notes", { cache: "no-store" });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = (await res.json()) as Note[];
+        const found = data.find(n => n.id === id) ?? null;
+        if (!found) throw new Error("Note not found");
+        setNote(found);
+        setTitle(found.title);
+        setBody(found.body ?? "");
+      } catch (e: any) {
+        setErr(e?.message ?? "Failed to load");
+      } finally {
+        setLoading(false);
+      }
+    })();
+  }, [id]);
+
+  async function onSave(e: React.FormEvent) {
+    e.preventDefault();
+    if (!title.trim()) return;
+    setSaving(true);
+    const res = await fetch(`/api/notes/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: title.trim(), content: body }),
+    });
+    setSaving(false);
+    if (!res.ok) return alert("Save failed");
+    router.push("/notes");
+  }
+
+  if (loading) return <main style={{ padding: 24 }}>Loading…</main>;
+  if (err) return <main style={{ padding: 24, color: "crimson" }}>Error: {err}</main>;
+
+  return (
+    <main style={{ padding: 24, display: "grid", gap: 16, maxWidth: 640 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+        <h1>Edit Note</h1>
+        <Link href="/notes" style={{ opacity: 0.8 }}>Back to Notes</Link>
+      </div>
+
+      <form onSubmit={onSave} style={{ display: "grid", gap: 8 }}>
+        <input
+          value={title}
+          onChange={e=>setTitle(e.target.value)}
+          placeholder="Title"
+          required
+          maxLength={120}
+          style={{ padding:8, border:"1px solid #ddd", borderRadius:6 }}
+        />
+        <textarea
+          value={body}
+          onChange={e=>setBody(e.target.value)}
+          rows={6}
+          placeholder="Body"
+          style={{ padding:8, border:"1px solid #ddd", borderRadius:6 }}
+        />
+        <button type="submit" disabled={saving} style={{ padding:8, border:"1px solid #999", borderRadius:6 }}>
+          {saving ? "Saving…" : "Save changes"}
+        </button>
+      </form>
+
+      <div style={{ fontSize:12, opacity:0.6 }}>
+        ID: {note?.id} • Created: {note ? new Date(note.createdAt).toLocaleString() : ""}
+      </div>
+    </main>
+  );
+}
+'@ | Set-Content .\app\notes\[id]\edit\page.tsx -Encoding utf8

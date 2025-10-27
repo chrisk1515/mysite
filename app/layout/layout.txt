@@ -1,0 +1,23 @@
+// app/layout.tsx
+import type { Metadata } from "next";
+import Link from "next/link";
+import "./globals.css"; // optional if you have it
+
+export const metadata: Metadata = { title: "My Site" };
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <html lang="en">
+      <body className="antialiased">
+        <header style={{
+          display:"flex", gap:16, alignItems:"center",
+          padding:"12px 16px", borderBottom:"1px solid #e5e5e5"
+        }}>
+          <Link href="/" style={{ fontWeight:700 }}>Home</Link>
+          <Link href="/notes">Notes</Link>
+        </header>
+        <main style={{ padding: 24 }}>{children}</main>
+      </body>
+    </html>
+  );
+}
