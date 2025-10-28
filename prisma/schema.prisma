@@ -1,6 +1,13 @@
-// prisma/schema.prisma
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")            // pooled
-  directUrl = env("DATABASE_URL_UNPOOLED")   // direct
+  url       = env("DATABASE_URL")   // pooled at runtime
+  directUrl = env("DIRECT_URL")     // direct for migrations
+}
+// package.json
+{
+  "scripts": {
+    "build": "next build",
+    "postinstall": "prisma generate",
+    "prisma:deploy": "prisma migrate deploy"
+  }
 }
