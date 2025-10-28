@@ -1,13 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider  = "postgresql"
-  url       = env("DATABASE_URL")   // pooled at runtime
-  directUrl = env("DIRECT_URL")     // direct for migrations
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
 }
-// package.json
-{
-  "scripts": {
-    "build": "next build",
-    "postinstall": "prisma generate",
-    "prisma:deploy": "prisma migrate deploy"
-  }
 }
+
+model Note {
+  id        String   @id @default(cuid())
+  title     String
+  body      String
+  createdAt DateTime @default(now())
+}
+
