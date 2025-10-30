@@ -3,14 +3,13 @@ generator client {
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DATABASE_URL_UNPOOLED")
+  provider = "sqlite"
+  url      = "file:./dev.db"
 }
 
 model Note {
   id        String   @id @default(cuid())
   title     String
-  body      String
+  body      String?
   createdAt DateTime @default(now())
 }

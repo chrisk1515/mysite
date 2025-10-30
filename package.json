@@ -6,49 +6,29 @@
     "dev": "next dev -p 3012",
     "build": "next build",
     "start": "next start -p 3000",
+    "postinstall": "prisma generate",
     "lint": "eslint",
     "studio": "prisma studio",
     "smoke": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3000",
-    "smoke:3001": "powershell -ExecutionPolicy Bypass -File .\\\\smoke-test.ps1 -Port 3001",
-    "dev:web": "next dev -p 3012",
-    "build:web": "next build",
-    "start:web": "next start -p 3000",
-    "migrate:deploy": "prisma migrate deploy",
-    "postinstall": "prisma generate",
-    "start:3020": "next start -p 3020"
+    "db:push": "prisma db push",
+    "db:gen": "prisma generate"
   },
   "dependencies": {
-    "@neondatabase/serverless": "1.0.2",
-    "@prisma/client": "^6.18.0",
-    "@prisma/extension-accelerate": "^2.0.2",
-    "dotenv": "17.2.3",
-    "next": "^16.0.0",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "@prisma/client": "6.18.0",
+    "next": "16.0.0",
+    "react": "19.2.0",
+    "react-dom": "19.2.0"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20.19.23",
-    "@types/react": "^19.2.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.0",
     "eslint-import-resolver-typescript": "^4.4.4",
-    "prisma": "^6.18.0",
+    "prisma": "6.18.0",
     "tailwindcss": "^4",
-    "typescript": "^5.9.3"
-  },
-  "description": "Next.js (App Router) + Prisma + Notes API.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/<your-username>/mysite.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/<your-username>/mysite/issues"
-  },
-  "homepage": "https://github.com/<your-username>/mysite#readme"
+    "typescript": "^5"
+  }
 }
